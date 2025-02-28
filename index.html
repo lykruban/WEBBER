@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional digital design studio offering web design, UI/UX, and digital solutions. View our portfolio of e-commerce, blogs, landing pages and more.">
+    <meta name="keywords" content="digital design, web design, UI/UX design, e-commerce, portfolio, landing page, dashboard, mobile app, Website, how to make a website, how to make a landing page, how to make a blog, how to make a dashboard, how to make a mobile app">
+    <meta name="author" content="WEBBER">
+    <meta property="og:title" content="WEBBER - Professional Web & UI/UX Design">
+    <meta property="og:description" content="Professional digital design studio offering web design, UI/UX, and digital solutions. View our portfolio.">
+    <meta property="og:type" content="website">
+    <title>WEBBER - Professional Web & UI/UX Design Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        :root {
+            --bg: #000;
+            --text: #fff;
+            --border: #fff;
+        }
+
+        .light-mode {
+            --bg: #fff;
+            --text: #000;
+            --border: #000;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 30px;
+            background: var(--text);
+            border-radius: 15px;
+            cursor: pointer;
+            z-index: 1000;
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.5); /* Added glow effect */
+        }
+
+        .toggle-bubble {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: var(--bg);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .light-mode .toggle-bubble {
+            transform: translateX(30px);
+        }
+
+        .theme-bubble {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 0;
+            height: 0;
+            background: var(--text);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .theme-toggle:hover + .theme-bubble {
+            width: 100px;
+            height: 100px;
+        }
+
+        .theme-bubble.expanding {
+            width: 300vh;
+            height: 300vh;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: var(--text);
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10vw;
+        }
+
+        .title-container {
+            flex: 1;
+        }
+
+        .title {
+            font-size: 5vw;
+            font-weight: 900;
+            line-height: 1.2;
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.5); /* Added glow effect */
+        }
+
+        .title span {
+            display: block;
+            transform: translateX(-100px);
+            opacity: 0;
+        }
+
+        .title span.slide-in {
+            animation: slideIn 0.5s forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .cta-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 2rem;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            width: 200px;
+            font-size: 1.2rem;
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none; /* Removed underline */
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.5); /* Added glow effect */
+            display: flex; /* Added to center text */
+            justify-content: center; /* Center text horizontally */
+            align-items: center; /* Center text vertically */
+        }
+
+        .cta-button:hover {
+            background: var(--text);
+            color: var(--bg);
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.7); /* Enhanced glow on hover */
+        }
+
+        .portfolio {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            place-items: center;
+            padding: 2rem;
+        }
+
+        .portfolio.visible {
+            display: grid;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+        }
+
+        .card {
+            position: relative;
+            height: 300px;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease;
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.5); /* Added glow effect */
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            z-index: 1;
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.7); /* Enhanced glow on hover */
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(3px) brightness(0.7) grayscale(100%);
+        }
+
+        .card-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            width: 100%;
+            padding: 1rem;
+            color: var(--text); /* Keep text white */
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.5); /* Added glow effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="toggle-bubble"></div>
+    </div>
+    <div class="theme-bubble"></div>
+    <div class="stars"></div>
+    
+    <section class="hero">
+        <div class="title-container">
+            <h1 class="title">
+                <span>DESIGN</span>
+                <span>YOUR</span>
+                <span>DIGITAL</span>
+            </h1>
+        </div>
+        
+        <div class="cta-container">
+            <a href="https://wa.me/14379880743" class="cta-button">Get in Touch</a>
+            <button class="cta-button" onclick="togglePortfolio()">See My Work</button>
+        </div>
+    </section>
+
+    <div class="portfolio" id="portfolio" onclick="togglePortfolio()">
+        <div class="grid" onclick="event.stopPropagation()">
+            <a href="https://lykruban.github.io/dental/" class="card">
+                <img src="clinic.jpg" alt="Dental Website">
+                <div class="card-title">Dental Website</div>
+            </a>
+            <a href="https://lykruban.github.io/Gym/" class="card">
+                <img src="gym.jpg" alt="Gym Website">
+                <div class="card-title">Gym Website</div>
+            </a>
+            <a href="https://lykruban.github.io/Jewelry/" class="card">
+                <img src="ecommerce.jpg" alt="E-Commerce Website">
+                <div class="card-title">E-Commerce Website</div>
+            </a>
+            <a href="https://lykruban.github.io/LocalService/" class="card">
+                <img src="local.jpg" alt="Local Services">
+                <div class="card-title">Local Services</div>
+            </a>
+            <a href="https://lykruban.github.io/CarDealer/" class="card">
+                <img src="car.jpg" alt="Car Dealership">
+                <div class="card-title">Car Dealership</div>
+            </a>
+            <a href="https://lykruban.github.io/Digital/" class="card">
+                <img src="crypto.jpg" alt="Digital Website">
+                <div class="card-title">Digital Website</div>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Create stars
+        const starsContainer = document.querySelector('.stars');
+        for(let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.width = `${Math.random() * 3}px`;
+            star.style.height = star.style.width;
+            star.style.animationDelay = `${Math.random() * 2}s`;
+            starsContainer.appendChild(star);
+        }
+
+        function togglePortfolio() {
+            const portfolio = document.getElementById('portfolio');
+            portfolio.classList.toggle('visible');
+            
+            if(portfolio.classList.contains('visible')) {
+                const cards = document.querySelectorAll('.card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('visible');
+                    }, index * 100);
+                });
+            } else {
+                const cards = document.querySelectorAll('.card');
+                cards.forEach(card => card.classList.remove('visible'));
+            }
+        }
+
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeBubble = document.querySelector('.theme-bubble');
+
+        themeToggle.addEventListener('mouseenter', () => {
+            themeBubble.style.width = '100px';
+            themeBubble.style.height = '100px';
+        });
+
+        themeToggle.addEventListener('mouseleave', () => {
+            if (!themeBubble.classList.contains('expanding')) {
+                themeBubble.style.width = '0';
+                themeBubble.style.height = '0';
+            }
+        });
+
+        function animateTitle() {
+            const titleSpans = document.querySelectorAll('.title span');
+            titleSpans.forEach((span, index) => {
+                span.classList.remove('slide-in');
+                setTimeout(() => {
+                    span.classList.add('slide-in');
+                }, 1000 + (index * 200));
+            });
+        }
+
+        function toggleTheme() {
+            themeBubble.classList.add('expanding');
+            setTimeout(() => {
+                document.body.classList.toggle('light-mode');
+                animateTitle();
+                setTimeout(() => {
+                    themeBubble.classList.remove('expanding');
+                    themeBubble.style.width = '0';
+                    themeBubble.style.height = '0';
+                }, 500);
+            }, 300);
+        }
+
+        // Initial title animation on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            animateTitle();
+        });
+    </script>
+</body>
+</html>
