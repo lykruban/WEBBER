@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Expert SEO services and web design solutions that deliver measurable results. Our data-driven strategies help businesses rank higher on Google and outperform competitors.">
+    <meta name="keywords" content="SEO services, web design, SEO optimization, Google ranking, keyword research, backlink strategy, local SEO, technical SEO, content strategy, digital marketing">
+    <meta name="author" content="WEBBER">
+    <meta property="og:title" content="WEBBER - Professional SEO & Web Design Services">
+    <meta property="og:description" content="Expert SEO services and web design solutions that deliver measurable results. Rank higher on Google and outperform competitors.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://webber.com/services">
+    <meta property="og:image" content="https://webber.com/images/seo-services.jpg">
+    <link rel="canonical" href="https://webber.com/services">
+    <title>SEO Services & Web Design Solutions | WEBBER</title>
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+            transition: color 0.3s, background-color 0.3s;
+        }
+
+        :root {
+            --bg: #000;
+            --text: #fff;
+            --border: #fff;
+            --accent: #ff3e00;
+            --calendly-bg: #000;
+            --calendly-text: #fff;
+        }
+
+        .light-mode {
+            --bg: #fff;
+            --text: #000;
+            --border: #000;
+            --accent: #ff3e00;
+            --calendly-bg: #fff;
+            --calendly-text: #000;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            width: 60px;
+            height: 30px;
+            background: var(--text);
+            border-radius: 15px;
+            cursor: pointer;
+            z-index: 1000;
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+        }
+
+        .toggle-bubble {
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            background: var(--bg);
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .light-mode .toggle-bubble {
+            transform: translateX(30px);
+        }
+
+        .theme-bubble {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            width: 0;
+            height: 0;
+            background: var(--text);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: var(--text);
+            border-radius: 50%;
+            animation: twinkle 1s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        .header {
+            padding: 2rem;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transform: translateY(-50px);
+            animation: fadeInDown 1s forwards 0.5s;
+        }
+
+        .header-subtitle {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s forwards 0.8s;
+            text-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
+        }
+
+        .nav-button {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            z-index: 1000;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .service-section {
+            margin-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .service-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .service-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            line-height: 1.6;
+        }
+
+        .service-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .service-item {
+            border: 2px solid var(--border);
+            padding: 2rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .service-item:nth-child(even) {
+            transform: translateX(50px);
+        }
+
+        .service-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+        }
+
+        .service-item-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .service-item-quote {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .service-item-list {
+            list-style: none;
+        }
+
+        .service-item-list li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .service-item-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .why-different {
+            background: rgba(255, 62, 0, 0.1);
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+            border-left: 4px solid var(--accent);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease;
+        }
+
+        .why-different.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .why-different-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .why-different-quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .why-different-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .why-different-item {
+            display: flex;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .why-different-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .why-different-item strong {
+            color: var(--accent);
+            margin-right: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('seo-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 4rem 0;
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        .cta-section.visible {
+            opacity: 1;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 62, 0, 0.3);
+        }
+
+        .cta-description {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .get-in-touch {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--text);
+            color: var(--bg);
+            border: 2px solid var(--border);
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .get-in-touch:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .contact-options {
+            display: none;
+            position: absolute;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            padding: 1rem;
+            z-index: 1001;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-options.show {
+            display: block;
+        }
+
+        .contact-option {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem 0;
+            text-decoration: none;
+            color: var(--text);
+            transition: all 0.3s ease;
+            text-align: left;
+            border: 1px solid var(--border);
+        }
+
+        .contact-option:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .contact-option i {
+            margin-right: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .service-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-different-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-title {
+                font-size: 5rem;
+            }
+
+            .header-subtitle {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .service-list {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .why-different-list {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <div class="toggle-bubble"></div>
+    </div>
+    <div class="theme-bubble"></div>
+    <div class="stars"></div>
+    
+    <a href="index.html" class="nav-button">← Back Home</a>
+    
+    <header class="header">
+        <h1 class="header-title">What We Do</h1>
+        <p class="header-subtitle">We don't just build websites – we engineer Google-obsessed profit engines. Our sites rank faster, convert harder, and outmaneuver competitors by combining surgical web design with ruthless SEO strategy.</p>
+    </header>
+    
+    <main class="services-container">
+        <section class="service-section">
+            <h2 class="service-title">Precision SEO Services</h2>
+            <p class="service-description">Your website deserves more than hope-based marketing. We implement data-driven strategies that deliver measurable results.</p>
+            
+            <div class="service-list">
+                <div class="service-item">
+                    <h3 class="service-item-title">1. SEO Optimization</h3>
+                    <p class="service-item-quote">"Your website deserves more than hope-based marketing."</p>
+                    <ul class="service-item-list">
+                        <li>Technical SEO: Site speed optimization, mobile-first indexing, crawl error fixes</li>
+                        <li>Content Strategy: Blog posts that answer exact questions your buyers ask</li>
+                        <li>Algorithm Armor: Updates that keep you safe from Google's mood swings</li>
+                    </ul>
+                </div>
+                
+                <div class="service-item">
+                    <h3 class="service-item-title">2. Google Search Domination</h3>
+                    <p class="service-item-quote">"First page or irrelevant."</p>
+                    <ul class="service-item-list">
+                        <li>Keyword mapping that steals competitors' rankings</li>
+                        <li>Featured snippet optimization for "Position 0" ownership</li>
+                        <li>Schema markup to make Google love your content</li>
+                    </ul>
+                </div>
+                
+                <div class="service-item">
+                    <h3 class="service-item-title">3. SEO Backlink Warfare</h3>
+                    <p class="service-item-quote">"Links are the currency of trust – we print it for you."</p>
+                    <ul class="service-item-list">
+                        <li>Guest post campaigns on authority sites in your niche</li>
+                        <li>Broken link building that hijacks competitors' links</li>
+                        <li>HARO-powered PR links from .edu and .gov domains</li>
+                    </ul>
+                </div>
+                
+                <div class="service-item">
+                    <h3 class="service-item-title">4. Google Business Optimization</h3>
+                    <p class="service-item-quote">"Own the map or disappear."</p>
+                    <ul class="service-item-list">
+                        <li>GMB profile setup with conversion-focused categories</li>
+                        <li>Review generation system (50+ 5-star reviews in 90 days)</li>
+                        <li>Local post strategy to dominate "near me" searches</li>
+                    </ul>
+                </div>
+                
+                <div class="service-item">
+                    <h3 class="service-item-title">5. Keyword Research & Execution</h3>
+                    <p class="service-item-quote">"We target the money phrases, not the vanity metrics."</p>
+                    <ul class="service-item-list">
+                        <li>Buyer intent analysis to find transactional keywords</li>
+                        <li>Long-tail keyword optimization for low-competition wins</li>
+                        <li>Competitor keyword gap exploitation</li>
+                    </ul>
+                </div>
+                
+                <div class="service-item">
+                    <h3 class="service-item-title">6. Local Citation Annihilation</h3>
+                    <p class="service-item-quote">"Your NAP is your reputation – we weaponize it."</p>
+                    <ul class="service-item-list">
+                        <li>150+ directory listings with consistent Name/Address/Phone</li>
+                        <li>Industry-specific citations (Yelp, HomeAdvisor, etc.)</li>
+                        <li>Fake listing removal and reputation firewalls</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <section class="why-different">
+            <h2 class="why-different-title">Why We're Different</h2>
+            <p class="why-different-quote">"Most designers build websites. We build unfair advantages."</p>
+            
+            <div class="why-different-list">
+                <div class="why-different-item">
+                    <strong>100% White-Hat:</strong>
+                    <span>No shortcuts, no penalties, no BS</span>
+                </div>
+                
+                <div class="why-different-item">
+                    <strong>Data-Driven Design:</strong>
+                    <span>Websites structured for SEO first, aesthetics second</span>
+                </div>
+                
+                <div class="why-different-item">
+                    <strong>Transparent Tracking:</strong>
+                    <span>Real-time dashboard shows rankings, traffic, leads</span>
+                </div>
+                
+                <div class="why-different-item">
+                    <strong>Guaranteed Results:</strong>
+                    <span>"Page 1 in 90 days or we work free until you do"</span>
+                </div>
+            </div>
+        </section>
+        
+        <section class="cta-section">
+            <h2 class="cta-title">Your Competitors Are Ranking – Why Aren't You?</h2>
+            <a href="javascript:void(0)" class="cta-button" onclick="showContactOptions('audit-options')">Free Site Audit</a>
+            <div id="audit-options" class="contact-options">
+                <a href="https://wa.me/14379880743?text=I'd%20like%20a%20free%20site%20audit" class="contact-option"><i>📱</i> WhatsApp</a>
+                <a href="javascript:void(0)" class="contact-option" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/rubansingh126/30min'})"><i>📅</i> Calendly</a>
+            </div>
+            <p class="cta-description">Get our 27-point SEO report revealing EXACTLY why Google ignores you</p>
+            <a href="javascript:void(0)" class="get-in-touch" onclick="showContactOptions('contact-options')">Get In Touch</a>
+            <div id="contact-options" class="contact-options">
+                <a href="https://wa.me/14379880743?text=I'd%20like%20to%20discuss%20my%20project" class="contact-option"><i>📱</i> WhatsApp</a>
+                <a href="javascript:void(0)" class="contact-option" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/rubansingh126/30min'})"><i>📅</i> Calendly</a>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 WEBBER. All rights reserved.</p>
+    </footer>
+    
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script type="application/ld+json">  
+    {  
+      "@context": "https://schema.org",  
+      "@type": "ProfessionalService",  
+      "name": "WEBBER",  
+      "image": "https://raw.githubusercontent.com/lykruban/WEBBER/refs/heads/main/logo.png",  
+      "description": "SEO-obsessed web designers helping businesses dominate Google",  
+      "url": "https://webber.com/services",
+      "telephone": "+14379880743",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Toronto",
+        "addressRegion": "ON",
+        "addressCountry": "CA"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "43.6532",
+        "longitude": "-79.3832"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      "priceRange": "$$",
+      "service": [  
+        {
+          "@type": "Service",
+          "name": "SEO Optimization",
+          "description": "Technical SEO, content strategy, and algorithm updates to improve search rankings"
+        },
+        {
+          "@type": "Service",
+          "name": "Google Search Dominance",
+          "description": "Keyword mapping, featured snippet optimization, and schema markup implementation"
+        },
+        {
+          "@type": "Service",
+          "name": "Local SEO",
+          "description": "Google Business Profile optimization and local citation building"
+        },
+        {
+          "@type": "Service",
+          "name": "Technical Web Design",
+          "description": "SEO-focused website development with mobile optimization"
+        }
+      ],  
+      "areaServed": ["Toronto", "Mississauga", "Etobicoke"],
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "John Smith"
+        },
+        "reviewBody": "WEBBER transformed our online presence. Our website now ranks on the first page for our target keywords and our leads have increased by 300%."
+      }
+    }  
+    </script>
+    <script>
+        const starsContainer = document.querySelector('.stars');
+        for(let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.width = `${Math.random() * 3}px`;
+            star.style.height = star.style.width;
+            star.style.animationDelay = `${Math.random() * 2}s`;
+            starsContainer.appendChild(star);
+        }
+        
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeBubble = document.querySelector('.theme-bubble');
+        
+        function toggleTheme() {
+            themeBubble.style.width = '4000px';
+            themeBubble.style.height = '4000px';
+            
+            themeBubble.classList.add('expanding');
+            setTimeout(() => {
+                document.body.classList.toggle('light-mode');
+                
+                setTimeout(() => {
+                    themeBubble.classList.remove('expanding');
+                    themeBubble.style.width = '0';
+                    themeBubble.style.height = '0';
+                }, 500);
+            }, 300);
+        }
+        
+        // Function to show contact options
+        function showContactOptions(id) {
+            const options = document.getElementById(id);
+            
+            // Close all other open option menus
+            document.querySelectorAll('.contact-options.show').forEach(menu => {
+                if (menu.id !== id) {
+                    menu.classList.remove('show');
+                }
+            });
+            
+            // Toggle the clicked menu
+            options.classList.toggle('show');
+            
+            // Position the options menu
+            const button = event.currentTarget;
+            const rect = button.getBoundingClientRect();
+            options.style.top = `${rect.bottom + window.scrollY}px`;
+            options.style.left = `${rect.left + window.scrollX}px`;
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function closeMenu(e) {
+                if (!options.contains(e.target) && e.target !== button) {
+                    options.classList.remove('show');
+                    document.removeEventListener('click', closeMenu);
+                }
+            });
+        }
+        
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // If this is a service section, animate its items
+                    if (entry.target.classList.contains('service-section')) {
+                        const items = entry.target.querySelectorAll('.service-item');
+                        items.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                    
+                    // If this is the why-different section, animate its items
+                    if (entry.target.classList.contains('why-different')) {
+                        const items = entry.target.querySelectorAll('.why-different-item');
+                        items.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('visible');
+                            }, index * 200);
+                        });
+                    }
+                } else {
+                    // Optional: remove the class when scrolling away
+                    // entry.target.classList.remove('visible');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections that should animate on scroll
+        document.querySelectorAll('.service-section, .why-different, .cta-section').forEach(section => {
+            observer.observe(section);
+        });
+        
+        // Initialize Calendly badge widget
+        window.onload = function() { 
+            Calendly.initBadgeWidget({ 
+                url: 'https://calendly.com/rubansingh126/30min', 
+                text: 'Schedule time with me', 
+                color: '#000000', 
+                textColor: '#ffffff' 
+            }); 
+        }
+    </script>
+</body>
+</html>
